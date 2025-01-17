@@ -48,9 +48,3 @@ target_include_directories(
     PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-
-if("${CMAKE_SYSTEM_NAME}" STREQUAL "WASI")
-    add_subdirectory(${CMAKE_SOURCE_DIR}/wasmedge_wasi_socket_c ${CMAKE_BINARY_DIR}/wasmedge_wasi_socket_c)
-
-    # target_link_libraries(fetch wasmedge_wasi_socket_c)
-endif()
