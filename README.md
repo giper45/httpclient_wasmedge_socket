@@ -6,6 +6,8 @@ note: Because WasmEdge is not compatible with the latest wasi-libc, we need to d
 
 note: Only supports WasmEdge 0.10.0 and later.
 
+note: Ensure that `wasi_socket_ext.h` is included in your include path.
+
 ```
 $ export WASI_SDK_HOME=path/to/wasi-sdk
 $ cmake -Bbuild -DCMAKE_BUILD_TYPE=Release -DWASI_SDK_PREFIX=${WASI_SDK_HOME} -DCMAKE_TOOLCHAIN_FILE=${WASI_SDK_HOME}/share/cmake/wasi-sdk.cmake

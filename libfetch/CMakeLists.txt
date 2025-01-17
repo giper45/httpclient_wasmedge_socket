@@ -5,9 +5,14 @@ option(ENABLE_SSL "enable ssl" OFF)
 option(ELABLE_FTP "enable ftp" OFF)
 
 include_directories(include/fetch)
+include_directories(${CMAKE_SOURCE_DIR}/wasmedge_wasi_socket_c/include) 
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "WASI")
+message(STATUS "SOURCE DIR IS: ${CMAKE_SOURCE_DIR}")
+
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "WASI")
     add_definitions(-DMSG_NOSIGNAL=0)
+else()
+    message(STATUS "Is CMAKE_SYSTEM_NAME equal to WASI: false")
 endif()
 
 set(
@@ -43,3 +48,9 @@ target_include_directories(
     PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "WASI")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/wasmedge_wasi_socket_c ${CMAKE_BINARY_DIR}/wasmedge_wasi_socket_c)
+
+    # target_link_libraries(fetch wasmedge_wasi_socket_c)
+endif()

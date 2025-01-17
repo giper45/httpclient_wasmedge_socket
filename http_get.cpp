@@ -3,6 +3,17 @@
 #include <iostream>
 #include <fetch/fetch.h>
 
+extern "C" {
+    void* __cxa_allocate_exception(size_t) {
+      abort();
+    }
+
+   void __cxa_throw() {
+      abort();
+   }
+}
+
+
 auto http_get() -> void {
   std::array<char, 4096> buf{};
   fetchIO *io = fetchGetURL("http://www.example.com", "4");
